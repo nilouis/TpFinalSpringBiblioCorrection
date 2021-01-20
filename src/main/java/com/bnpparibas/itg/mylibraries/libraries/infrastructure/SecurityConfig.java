@@ -15,17 +15,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers( "/h2-console/**").permitAll()
                 .antMatchers( "/**.css").permitAll()
                 .antMatchers(
-                        "/", "/csrf",
-                        "/v2/api-docs",
-                        "/swagger-resources/**",
-                        "/swagger-ui.html",
-                        "/webjars/**"
+        "/", "/csrf",
+        "/v2/api-docs",
+        "/swagger-resources/**",
+        "/swagger-ui.html",
+        "/webjars/**"
                 ).permitAll()
 
                 .anyRequest().authenticated()
                 .and()
                 .headers().frameOptions().disable() //for H2-console
                 .and()
+                .csrf().ignoringAntMatchers("/h2-console/**")
+
                 ;
 
 
