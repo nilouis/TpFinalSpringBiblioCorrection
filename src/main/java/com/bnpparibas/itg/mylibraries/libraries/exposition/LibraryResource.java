@@ -5,12 +5,14 @@ import com.bnpparibas.itg.mylibraries.libraries.domain.library.Library;
 import com.bnpparibas.itg.mylibraries.libraries.domain.library.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@Secured(value={"ROLE_USER","ROLE_ADMIN"})
 public class LibraryResource {
 
     @Autowired

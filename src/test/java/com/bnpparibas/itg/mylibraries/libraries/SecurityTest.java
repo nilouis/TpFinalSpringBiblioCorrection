@@ -26,9 +26,9 @@ public class SecurityTest {
         mvc.perform(get("/unsecured/toto"))
             .andExpect(status().isOk());
         mvc.perform(get("/librairies"))
-            .andExpect(status().isForbidden());
+            .andExpect(status().isUnauthorized());
         mvc.perform(get("/notexist"))
-            .andExpect(status().isForbidden());
+            .andExpect(status().isUnauthorized());
 
     }
 
@@ -38,5 +38,13 @@ public class SecurityTest {
     public void testIfSecure_2()throws Exception{
         mvc.perform(get("/libraries"))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    @DisplayName("Test du role user sur une ressource admin")
+    @WithMockUser(authorities = "USER_ROLE")
+    public void testUserRefused() throws Exception{
+        mvc.perform(get("/admin"))
+                .andExpect(status().isForbidden());
     }
 }

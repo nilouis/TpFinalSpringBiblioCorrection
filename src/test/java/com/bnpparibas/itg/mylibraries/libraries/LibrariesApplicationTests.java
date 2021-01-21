@@ -18,6 +18,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.test.context.support.WithMockUser;
 
 import java.util.Arrays;
 import java.util.Optional;
@@ -107,6 +108,7 @@ class LibrariesApplicationTests {
 
 		@Test
 		@DisplayName("should return a status created with ID of created library when passing a correct library")
+		@WithMockUser(authorities = "USER_ROLE")
 		void test_create_1(){
 			//--------------- Given ---------------
 			LibraryDTO national_library_montreuil_dto = new LibraryDTO(
